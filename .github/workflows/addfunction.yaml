@@ -1,0 +1,33 @@
+name: Python Addition
+
+on:
+  workflow_dispatch:
+    inputs:
+      num1:
+        description: "Enter First Number"
+        required: true
+        default: "10"
+
+      num2:
+        description: "Enter Second Number"
+        required: true
+        default: "20"
+
+jobs:
+  addition:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run Python Program
+        env:
+          NUM1: ${{ github.event.inputs.num1 }}
+          NUM2: ${{ github.event.inputs.num2 }}
+        run: python addition.py
